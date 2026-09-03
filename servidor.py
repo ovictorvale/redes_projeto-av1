@@ -14,7 +14,7 @@ def processar_comando(mensagem):
 
     if operacao == "SAIR":
         if len(partes) == 1:
-            return None
+            return "SAIR"
 
         return "ERRO: formato invalido (use: OPERACAO NUM1 NUM2)"
 
@@ -67,7 +67,8 @@ def atender_cliente(conexao, endereco):
 
             resposta = processar_comando(mensagem)
 
-            if resposta is None:
+            if resposta == "SAIR":
+                conexao.sendall("(conexão encerrada)".encode("utf-8"))
                 break
 
             conexao.sendall(resposta.encode("utf-8"))
