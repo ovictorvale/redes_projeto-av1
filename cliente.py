@@ -20,6 +20,8 @@ def iniciar_cliente():
         cliente.sendall(comando.encode("utf-8"))
 
         if comando.upper() == "SAIR":
+            resposta = cliente.recv(1024).decode("utf-8")
+            print(resposta)
             break
 
         resposta = cliente.recv(1024).decode("utf-8")
